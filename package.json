@@ -1,0 +1,15 @@
+{
+  "name": "com.charmgames.chimera",
+  "version": "1.0.0",
+  "displayName": "Chimera",
+  "description": "2D Fluid Simulation",
+  "keywords": [
+    "charmgames",
+    "package"
+  ],
+  "author": {
+    "name": "Charm Games",
+    "email": "info@charmgames.com",
+    "url": "https://www.charmgames.com"
+  }
+}
