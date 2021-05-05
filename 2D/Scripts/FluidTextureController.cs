@@ -70,6 +70,9 @@ namespace Chimera
    		private void OnDisable() {
    
    			ReleaseEmittersBuffer();
+
+            // Initialize the render texture to clear it out
+            fluidTexture.Initialize();
    		}
    
    		#endregion

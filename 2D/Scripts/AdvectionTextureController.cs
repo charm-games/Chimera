@@ -66,6 +66,9 @@ namespace Chimera
    		private void OnDisable() {
    
    			ReleaseEmittersBuffer();
+
+            // Reinitialize the render texture
+            advectionTexture.Initialize();
    		}
    
    		#endregion
