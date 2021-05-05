@@ -7,6 +7,8 @@
         _dt("dt", float) = 0.15
         _Vorticity("Vorticity", float) = 0.11
 		_VelocityAttenuation("Velocity Attenuation", Range(0,1)) = 0
+        [Toggle(_HORIZONTAL_BOUNDARIES)] _HorizontalBoundaries ("Horizontal Boundaries", Float) = 1
+        [Toggle(_VERTICAL_BOUNDARIES)] _VerticalBoundaries ("Vertical Boundaries", Float) = 1
     }
 
         CGINCLUDE
@@ -19,6 +21,8 @@
         float _dt;
 		float _Vorticity;   //Recommended values between 0.03 and 0.2, higher values simulate lower viscosity fluids (think billowing smoke)
 		float _VelocityAttenuation;
+        float _HorizontalBoundaries;
+        float _VerticalBoundaries;
 
 		struct Emitter {
 			float2 position;
@@ -72,8 +76,13 @@
 			vort *= _Vorticity / length(vort + 1e-9) * data.w;
 			data.xy += vort;
 
-			data.x *= smoothstep(.5, .49, abs(uv.x - 0.5));
-			data.y *= smoothstep(.5, .49, abs(uv.y - 0.5)); //Boundaries
+            if (_HorizontalBoundaries != 0) {
+			    data.x *= smoothstep(.5, .49, abs(uv.x - 0.5)); 
+            }
+
+            if (_VerticalBoundaries != 0) {
+			    data.y *= smoothstep(.5, .49, abs(uv.y - 0.5)); //Boundaries
+            }
 
 			data.xy *= (1.0f - _VelocityAttenuation);
 
